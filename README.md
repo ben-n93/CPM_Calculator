@@ -8,3 +8,5 @@ You can calculate an impression goal, CPM or budget, depending on which two fiel
 ![CPM_Calculator_GIF_1](https://user-images.githubusercontent.com/84557025/146358191-fe2e406d-1afb-4a2e-ac52-b858547d7ae4.gif)
 
 The dollar symbol is a default value in the CPM and budget fields - I thought this was a nice visual reminder. Even if you hit the reset button the dollar symbol reappears.
+
+For a future update I'd like to ensure that the output value is formatted in a more readable format, e.g. 50000 impressions becomes '50,000' impressions.
