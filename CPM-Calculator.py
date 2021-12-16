@@ -152,6 +152,12 @@ def calculate_button_clicked():
         #Add dollar symbol to CPM field
         temp_value = '$' + CPM_field.text()
         CPM_field.setText(temp_value)
+        #Add dollar symbol to budget field
+        temp_value = '$' + budget_field.text()
+        budget_field.setText(temp_value)
+        #Add dollar symbol to CPM field
+        temp_value = '$' + CPM_field.text()
+        CPM_field.setText(temp_value)
 
     #Impressions calculation
     elif budget_field.text() and CPM_field.text():
