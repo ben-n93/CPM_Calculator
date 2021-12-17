@@ -96,11 +96,11 @@ def field_value_format(calculation):
     calculation_formatted = float(calculation)
     #Captures fractional points/numbers
     fractional_part = calculation_formatted % 1
-    #Checks to see if fractional part is 0, in which case calculated value is turned into an integer
+    #Checks to see if fractional part is 0, in which case calculated value is turned into an integer (to remove unnecessary decimal point)
     if fractional_part == 0:
         calculation_formatted = int(calculation_formatted)
     else:
-        #If the calculated value has a fractional part higher than 0, then value is rounded down to 2 decimal points
+        #If the calculated value has a fractional part higher than 0, then value is rounded down to 2 decimal points, for a more readable value.
         calculation_formatted = round(calculation_formatted,2)
     #Adds comma for every thousand digits
     calculation_formatted = "{:,}".format(calculation_formatted)
@@ -109,7 +109,7 @@ def field_value_format(calculation):
 def calculate_button_clicked():
     """Calculates CPM, budget or impressions, depending on which fields have a value."""
 
-    #First calls the field_check_fct to double check if all fields have a value - in which case, an error msg appears and True is returned.
+    #Call to the field_check_fct to double check if all fields have a value - in which case, an error message appears and no calculation is performed (due to the return of True value)
     if field_check_fct() == False:
         #Budget calculation    
         if impressions_field.text() and CPM_field.text():
@@ -145,6 +145,13 @@ def calculate_button_clicked():
         else:
             CPM_field.setText('$' + CPM_field.text())
             budget_field.setText('$' + budget_field.text())
+    else:
+        #Add dollar symbol to budget field
+        temp_value = '$' + budget_field.text()
+        budget_field.setText(temp_value)
+        #Add dollar symbol to CPM field
+        temp_value = '$' + CPM_field.text()
+        CPM_field.setText(temp_value)
 
 def reset_button_clicked():
     """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol"""
