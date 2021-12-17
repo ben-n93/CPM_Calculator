@@ -146,10 +146,9 @@ def calculate_button_clicked():
             CPM_field.setText('$' + CPM_field.text())
             budget_field.setText('$' + budget_field.text())
     else:
-        #Add dollar symbol to budget field
+        #If all 3 fields have a value, the following code ensures a dollar symbol is added to budget and CPM field
         temp_value = '$' + budget_field.text()
         budget_field.setText(temp_value)
-        #Add dollar symbol to CPM field
         temp_value = '$' + CPM_field.text()
         CPM_field.setText(temp_value)
 
