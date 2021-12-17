@@ -13,9 +13,4 @@ If all 3 fields have a value, an error message pops up:
 
 ![CPM_Calculator_ErrorGIF](https://user-images.githubusercontent.com/84557025/146488642-b219fc48-6263-494b-bfa1-5ac6398b48fd.gif)
 
-**Bugs/Errors
-**
-
-If a user enters text, program crashes - should be a simple fix I just haven't had time yet to fix it.
-
 If you have any feedback or suggestions, please don't hesitate to reach out!
