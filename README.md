@@ -5,12 +5,12 @@ Digital advertising cost per mille (CPM) calculator, created using the PyQt5 lib
 
 You can calculate an impression goal, CPM or budget, depending on which two fields have been entered:
 
-![CPM_Calculator_GIF](https://user-images.githubusercontent.com/84557025/146486389-b722ee8d-23a3-49f6-be28-4553ebdeb86e.gif)
+![CPM_Calculator_GIF](https://user-images.githubusercontent.com/84557025/146488624-2310d1c1-fc84-4398-b781-400ab55ace07.gif)
 
 The dollar symbol is a default value in the CPM and budget fields - I thought this was a nice visual reminder of the value type that goes in these fields. Even if you hit the reset button the dollar symbol reappears.
 
 If all 3 fields have a value, an error message pops up:
 
-![CPM_Calculator_Error_GIF](https://user-images.githubusercontent.com/84557025/146486225-30bd033f-5d2d-48c7-adb4-9cd3dd4c7224.gif)
+![CPM_Calculator_ErrorGIF](https://user-images.githubusercontent.com/84557025/146488642-b219fc48-6263-494b-bfa1-5ac6398b48fd.gif)
 
 If you have any feedback or suggestions, please don't hesitate to reach out!
