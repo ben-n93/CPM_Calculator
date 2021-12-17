@@ -79,7 +79,6 @@ def valid_input():
         if field.text():
             try:
                 value_check = float(field.text())
-                print(value_check)
                 return True
             except ValueError:
                 alert.setText("Error - please only enter numbers. ")
