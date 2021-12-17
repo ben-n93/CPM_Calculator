@@ -19,7 +19,6 @@ reset_button = QPushButton("Reset")
 #Alert message box
 alert = QMessageBox()
 alert.setIcon(QMessageBox.Warning)
-alert.setText("Error - all fields have a value.  Please ensure only two fields have a value. ")
 
 #Text labels/QLabels
 impressions_label = QLabel('Impressions:')
@@ -62,11 +61,8 @@ window.show()
 
 #Functions
 
-def field_check_fct():
-    """Checks to see if all fields have a value, in which case error message appears and True is returned"""
-
-    #Resets field value count
-    field_value_count = 0
+def valid_input():
+    """Checks to make sure user's input is valid."""
 
     #Removes non-alphanumerical characters/symbols (excluding dot) from field values, using sub fct from re module, and resets fields with formatted values
     temp_impressions_field_value = re.sub(r'[^\w'+'.'+']', '',impressions_field.text())
@@ -78,6 +74,27 @@ def field_check_fct():
     temp_cpm_field_value = re.sub(r'[^\w'+'.'+']', '', CPM_field.text())
     CPM_field.setText(temp_cpm_field_value)
 
+    #Checks for text input
+    for field in fields:
+        if field.text():
+            try:
+                value_check = float(field.text())
+                print(value_check)
+                return True
+            except ValueError:
+                alert.setText("Error - please only enter numbers. ")
+                alert.exec()
+                #Displays window, as a prompt for user to input valid value
+                window.show()
+                return False
+                break
+
+def field_check_fct():
+    """Checks to make sure ONLY two fields have a value."""
+
+    #Resets field value count
+    field_value_count = 0
+
     #For every field that has a value, field_value_count will increase. 
     for field in fields:
         if field.text():
@@ -85,6 +102,7 @@ def field_check_fct():
     #If all fields have a value, in which case field_value_count is 3, then an error message/window appears,
     #asking the user to ensure only 2 fields have a value. Also returns True, so calculate button doesn't run.
     if field_value_count == 3:
+        alert.setText("Error - all fields have a value.  Please ensure only two fields have a value. ")
         alert.exec()
         return True
     else:
@@ -109,62 +127,63 @@ def field_value_format(unformatted_value):
 def calculate_button_clicked():
     """Calculates CPM, budget or impressions, depending on which fields have a value."""
 
-    #Call to the field_check_fct to double check if all fields have a value - in which case, an error message appears and no calculation is performed (due to the return of True value)
-    if field_check_fct() == False:
-        #Budget calculation    
-        if impressions_field.text() and CPM_field.text():
-            calculation = (float(impressions_field.text()) / 1000) * float(CPM_field.text())
-            field_value_format(calculation)
-            budget_field.setText("$" + formatted_value)
-            #Formats CPM field (thousands comma seperator + dollar sign)
-            field_value_format(CPM_field.text())
-            temp_value = '$' + formatted_value
-            CPM_field.setText(temp_value)
-            #Formats impression field (thousands comma seperator)
-            field_value_format(impressions_field.text())
-            impressions_field.setText(formatted_value)
+    if valid_input() == True:
+        #Call to the field_check_fct to double check if all fields have a value - in which case, an error message appears and no calculation is performed (due to the return of True value)
+        if field_check_fct() == False:
+            #Budget calculation    
+            if impressions_field.text() and CPM_field.text():
+                calculation = (float(impressions_field.text()) / 1000) * float(CPM_field.text())
+                field_value_format(calculation)
+                budget_field.setText("$" + formatted_value)
+                #Formats CPM field (thousands comma seperator + dollar sign)
+                field_value_format(CPM_field.text())
+                temp_value = '$' + formatted_value
+                CPM_field.setText(temp_value)
+                #Formats impression field (thousands comma seperator)
+                field_value_format(impressions_field.text())
+                impressions_field.setText(formatted_value)
 
-        #Impressions calculation
-        elif budget_field.text() and CPM_field.text():
-            calculation = (float(budget_field.text()) / float(CPM_field.text())) * 1000
-            field_value_format(calculation)
-            impressions_field.setText(formatted_value)
-            #Formats CPM field (thousands comma seperator + dollar sign)
-            field_value_format(CPM_field.text())
-            temp_value = '$' + formatted_value
-            CPM_field.setText(temp_value)
-            #Formats budget field (thousands comma seperator + dollar sign)
-            field_value_format(budget_field.text())
-            temp_value = '$' + formatted_value
-            budget_field.setText(temp_value)
+            #Impressions calculation
+            elif budget_field.text() and CPM_field.text():
+                calculation = (float(budget_field.text()) / float(CPM_field.text())) * 1000
+                field_value_format(calculation)
+                impressions_field.setText(formatted_value)
+                #Formats CPM field (thousands comma seperator + dollar sign)
+                field_value_format(CPM_field.text())
+                temp_value = '$' + formatted_value
+                CPM_field.setText(temp_value)
+                #Formats budget field (thousands comma seperator + dollar sign)
+                field_value_format(budget_field.text())
+                temp_value = '$' + formatted_value
+                budget_field.setText(temp_value)
 
-        #CPM calculation
-        elif budget_field.text() and impressions_field.text():
-            calculation = 1000 * (float(budget_field.text()) / float(impressions_field.text()))
-            field_value_format(calculation)
-            CPM_field.setText("$" + formatted_value)
-            #Formats budget field (thousands comma seperator + dollar sign)
-            field_value_format(budget_field.text())
-            temp_value = '$' + formatted_value
-            budget_field.setText(temp_value)
-            #Formats impression field (thousands comma seperator)
-            field_value_format(impressions_field.text())
-            impressions_field.setText(formatted_value)
+            #CPM calculation
+            elif budget_field.text() and impressions_field.text():
+                calculation = 1000 * (float(budget_field.text()) / float(impressions_field.text()))
+                field_value_format(calculation)
+                CPM_field.setText("$" + formatted_value)
+                #Formats budget field (thousands comma seperator + dollar sign)
+                field_value_format(budget_field.text())
+                temp_value = '$' + formatted_value
+                budget_field.setText(temp_value)
+                #Formats impression field (thousands comma seperator)
+                field_value_format(impressions_field.text())
+                impressions_field.setText(formatted_value)
 
-        #If only one field has a value or NO fields have a value, nothing happens other than a dollar symbol added to budget and CPM fields.
+            #If only one field has a value or NO fields have a value, nothing happens other than a dollar symbol added to budget and CPM fields.
+            else:
+                CPM_field.setText('$' + CPM_field.text())
+                budget_field.setText('$' + budget_field.text())
         else:
-            CPM_field.setText('$' + CPM_field.text())
-            budget_field.setText('$' + budget_field.text())
-    else:
-        #If all 3 fields have a value, the following code ensures field values are formatted with thousands seperator comma and dollar sign (excluding impressions field).
-        field_value_format(budget_field.text())
-        temp_value = '$' + formatted_value
-        budget_field.setText(temp_value)
-        field_value_format(CPM_field.text())
-        temp_value = '$' + formatted_value
-        CPM_field.setText(temp_value)
-        field_value_format(impressions_field.text())
-        impressions_field.setText(formatted_value)
+            #If all 3 fields have a value, the following code ensures field values are formatted with thousands seperator comma and dollar sign (excluding impressions field).
+            field_value_format(budget_field.text())
+            temp_value = '$' + formatted_value
+            budget_field.setText(temp_value)
+            field_value_format(CPM_field.text())
+            temp_value = '$' + formatted_value
+            CPM_field.setText(temp_value)
+            field_value_format(impressions_field.text())
+            impressions_field.setText(formatted_value)
 
 def reset_button_clicked():
     """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol"""
