@@ -86,7 +86,7 @@ def valid_input():
                 alert.exec()
                 #REMINDER - function ends when it returns a value, so, in the event of a field having valid input, False is returned and fct stops executing.
                 return False
-                #Loop doesn't continue if invalid user input detected - no point in checking other fields.
+                #Loop doesn't continue if invalid user input detected - no point in checking other friends.
                 break
     #Assuming all entered fields have a valid value, True is returned, so calculate button knows to execute calculation formulas.
     return True
@@ -173,7 +173,7 @@ def calculate_button_clicked():
 
             #CPM calculation
             elif budget_field.text() and impressions_field.text():
-                calculation = 1000 * str((float(budget_field.text()) / float(impressions_field.text())))
+                calculation = str(float(budget_field.text()) / float(impressions_field.text()) * 1000)
                 CPM_field.setText(calculation)
                 #Formats the value of all fields
                 field_value_format()
