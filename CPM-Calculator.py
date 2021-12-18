@@ -86,7 +86,7 @@ def valid_input():
                 alert.exec()
                 #REMINDER - function ends when it returns a value, so, in the event of a field having valid input, False is returned and fct stops executing.
                 return False
-                #Loop doesn't continue if invalid user input detected - no point in checking other friends.
+                #Loop doesn't continue if invalid user input detected - no point in checking other fields.
                 break
     #Assuming all entered fields have a valid value, True is returned, so calculate button knows to execute calculation formulas.
     return True
