@@ -76,16 +76,19 @@ def valid_input():
 
     #Checks for text input
     for field in fields:
+        #If field has a value, attempts to create a float.
         if field.text():
             try:
                 value_check = float(field.text())
+            #If unable to create a float (in which, user input is invalid), returns False, so the calculate button does not execute calculation formulas.
             except ValueError:
                 alert.setText("Error - please only enter numbers. ")
                 alert.exec()
-                #Displays window, as a prompt for user to input valid value
-                window.show()
+                #REMINDER - function ends when it returns a value, so, in the event of a field having valid input, False is returned and fct stops executing.
                 return False
+                #Loop doesn't continue if invalid user input detected - no point in checking other friends.
                 break
+    #Assuming all entered fields have a valid value, True is returned, so calculate button knows to execute calculation formulas.
     return True
 
 def field_check_fct():
@@ -102,6 +105,12 @@ def field_check_fct():
     #asking the user to ensure only 2 fields have a value. Also returns True, so calculate button doesn't run.
     if field_value_count == 3:
         alert.setText("Error - all fields have a value.  Please ensure only two fields have a value. ")
+        temp_value = CPM_field.text()
+        CPM_field.setText('$' + temp_value)
+        temp_value = budget_field.text()
+        budget_field.setText('$' + temp_value)
+        field_value_format(impressions_field.text())
+        impressions_field.setText(formatted_value)
         alert.exec()
         return True
     else:
@@ -124,7 +133,7 @@ def field_value_format(unformatted_value):
     return formatted_value
 
 def reset_button_clicked():
-    """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol"""
+    """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol."""
     impressions_field.setText('')
     CPM_field.setText('$')
     budget_field.setText('$')
