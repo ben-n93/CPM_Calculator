@@ -79,7 +79,6 @@ def valid_input():
         if field.text():
             try:
                 value_check = float(field.text())
-                return True
             except ValueError:
                 alert.setText("Error - please only enter numbers. ")
                 alert.exec()
@@ -87,6 +86,7 @@ def valid_input():
                 window.show()
                 return False
                 break
+    return True
 
 def field_check_fct():
     """Checks to make sure ONLY two fields have a value."""
@@ -122,10 +122,15 @@ def field_value_format(unformatted_value):
     #Adds comma for every thousand digits
     formatted_value = "{:,}".format(formatted_value)
     return formatted_value
+
+def reset_button_clicked():
+    """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol"""
+    impressions_field.setText('')
+    CPM_field.setText('$')
+    budget_field.setText('$')
     
 def calculate_button_clicked():
     """Calculates CPM, budget or impressions, depending on which fields have a value."""
-
     if valid_input() == True:
         #Call to the field_check_fct to double check if all fields have a value - in which case, an error message appears and no calculation is performed (due to the return of True value)
         if field_check_fct() == False:
@@ -173,22 +178,12 @@ def calculate_button_clicked():
             else:
                 CPM_field.setText('$' + CPM_field.text())
                 budget_field.setText('$' + budget_field.text())
-        else:
-            #If all 3 fields have a value, the following code ensures field values are formatted with thousands seperator comma and dollar sign (excluding impressions field).
-            field_value_format(budget_field.text())
-            temp_value = '$' + formatted_value
-            budget_field.setText(temp_value)
-            field_value_format(CPM_field.text())
-            temp_value = '$' + formatted_value
-            CPM_field.setText(temp_value)
-            field_value_format(impressions_field.text())
-            impressions_field.setText(formatted_value)
-
-def reset_button_clicked():
-    """Replaces impressions field with empty text and replaces CPM and budget fields with a dollar symbol"""
-    impressions_field.setText('')
-    CPM_field.setText('$')
-    budget_field.setText('$')
+    else:
+        try:
+            CPM_field.setText('$' + CPM_field.text())
+            budget_field.setText('$' + budget_field.text())
+        except ValueError:
+            pass
 
 #Calculate button signal/slot
 calculate_button.clicked.connect(calculate_button_clicked)
