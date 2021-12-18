@@ -13,9 +13,8 @@ If all 3 fields have a value, an error message pops up:
 
 ![CPM_Calculator_ErrorGIF](https://user-images.githubusercontent.com/84557025/146488642-b219fc48-6263-494b-bfa1-5ac6398b48fd.gif)
 
-If text is entered, an error message pops up:
+If text/invalid input is entered, an error message pops up:
 
-**GIF to come.
-**
+![CPM_Calculator_InvalidInputErrorGIF](https://user-images.githubusercontent.com/84557025/146634706-da582a06-3d53-4de1-9cf6-1b5ec18e91dc.gif)
 
 If you have any feedback or suggestions, please don't hesitate to reach out!
