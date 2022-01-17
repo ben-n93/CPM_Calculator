@@ -1,4 +1,4 @@
-# CPM_Calculator
+# CPM Calculator
 Digital advertising cost per mille (CPM) calculator, created using the PyQt5 library.
 
 <img width="274" alt="CPM_Calculator_Screenshot1" src="https://user-images.githubusercontent.com/84557025/146355127-3fa0dea7-5249-4eb0-8655-5e6c92faf0c5.png">
