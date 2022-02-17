@@ -1,7 +1,3 @@
-# Created by ben-n93 on 16.12.21.
-# github.com/ben-n93.
-
-# Import re module and PyQt5 QtWidgets.
 import re
 
 from PyQt5.QtWidgets import (
@@ -65,7 +61,7 @@ window.show()
 
 
 def valid_input():
-    """Checks to make sure user's input is valid."""
+    """Check to make sure user's input is valid."""
 
     # Removes non-alphanumerical characters/symbols (excluding dot) from field
     # values, using sub fct from re module, and resets fields with formatted
@@ -106,7 +102,7 @@ def valid_input():
 
 
 def field_check_fct():
-    """Checks to make sure ONLY two fields have a value."""
+    """Check to make sure ONLY two fields have a value."""
 
     # Resets field value count.
     field_value_count = 0
@@ -130,7 +126,7 @@ def field_check_fct():
 
 
 def field_value_format():
-    """Formats the values in the QLineEdit fields and returns a readable
+    """Format the values in the QLineEdit fields and return a readable
     value."""
 
     # Field format count, implemented for the dollar symbol formatting
@@ -176,7 +172,7 @@ def field_value_format():
 
 
 def reset_button_clicked():
-    """Replaces impressions field with empty text and replaces CPM and budget
+    """Replace impressions field with empty text and replace CPM and budget
     fields with a dollar symbol."""
 
     impressions_field.setText('')
@@ -185,7 +181,7 @@ def reset_button_clicked():
 
 
 def calculate_button_clicked():
-    """Calculates CPM, budget or impressions, depending on which fields have a
+    """Calculate CPM, budget or impressions, depending on which fields have a
     value."""
 
     # Call to check that valid text has been input, in which case True is
@@ -225,10 +221,8 @@ def calculate_button_clicked():
     else:
         pass
 
-
 # Calculate button signal/slot.
 calculate_button.clicked.connect(calculate_button_clicked)
-
 
 # Reset button signal/slot.
 reset_button.clicked.connect(reset_button_clicked)
