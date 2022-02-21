@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QPushButton)
 
 
-class MainWindow(QWidget):
+class Calculator(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('CPM Calculator')
@@ -193,6 +193,6 @@ class MainWindow(QWidget):
 
 if __name__ == "__main__":
     app = QApplication([])
-    window = MainWindow()
-    window.show()
+    calculator = Calculator()
+    calculator.show()
     app.exec()
